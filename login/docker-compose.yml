@@ -1,0 +1,56 @@
+#version: "3.0"
+#
+#services:
+#  login:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    ports:
+#      - 8085:8085
+#      -
+
+
+
+#version: "3.0"
+#
+#services:
+#  mysql-docker-container:
+#    image: mysql:latest
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=Kajal@786$
+#      - MYSQL_DATABASE=login1
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=Kajal@786$
+#    volumes:
+#      - /data/mysql
+#  login:
+#    image: login
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - mysql-docker-container
+#    ports:
+#      - 8085:8085
+
+version: "3.0"
+
+services:
+  mysql-docker-container:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=Kajal786
+      - MYSQL_DATABASE=login
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Kajal786
+    volumes:
+      - /data/mysql
+  login:
+    image: login
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-docker-container
+    ports:
+      - 8085:8085

@@ -1,0 +1,28 @@
+docker build . -t login-demo
+docker images
+docker run -p 8089:8089 --name login-demo -d login-demo
+docker container ls
+docker ps -a
+docker tag login-demo keyurmulani/login-demo
+docker push login-demo
+
+kubectl create deployment login-demo --image docker.io/keyurmulani/login-demo --dry-run -oyaml
+kubectl create service clusterip login-demo --tcp=8089:8089 --dry-run -oyaml
+
+
+kubectl create deployment login-demo --image docker.io/keyurmulani/login-demo --dry-run -oyaml > deployment.yaml
+
+kubectl create deployment login-demo --image docker.io/keyurmulani/login-demo --dry-run=client -oyaml > deployment.yaml
+
+kubectl create service clusterip login-demo --tcp=8080:8080 --dry-run -oyaml > service.yaml
+
+kubectl create service clusterip login-demo --tcp=8089:8089 --dry-run=client -oyaml > service.yaml
+
+kubectl apply -f k8s
+
+kubectl port-forward svc/login-demo 8089:8089
+
+kubectl get pods
+login-demo-7df54d8bcf-dh642   1/1     Running   0          53s
+login-demo-7df54d8bcf-s5pwz   1/1     Running   0          53s
+login-demo-7df54d8bcf-t6gx2   1/1     Running   0          53s

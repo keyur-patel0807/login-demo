@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: login-demo
+  name: login-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: login-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: login-demo
+    spec:
+      containers:
+      - image: docker.io/keyurmulani/login-demo
+        name: login-demo
+        resources: {}
+status: {}
